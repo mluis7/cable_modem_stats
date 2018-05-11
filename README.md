@@ -18,18 +18,18 @@ Values are obtained parsing the html with `xmllint`and the following XPath for e
 ```
 
 ## rrdtool data source
-Let's create the data source specifying the start time in Unix Epoch time.
+Let's create the data source specifying the start time in Unix Epoch time. The type of the data source is set to DERIVE instead of COUNTER to avoid the spike in the graphic in case the router is restarted.
 
 ```bash
 rrdtool create TG862A-downstream.rrd --start 1525303000 \
-    DS:stream1:COUNTER:600:U:U \
-    DS:stream2:COUNTER:600:U:U \
-    DS:stream3:COUNTER:600:U:U \
-    DS:stream4:COUNTER:600:U:U \
-    DS:stream5:COUNTER:600:U:U \
-    DS:stream6:COUNTER:600:U:U \
-    DS:stream7:COUNTER:600:U:U \
-    DS:stream8:COUNTER:600:U:U \
+    DS:stream1:DERIVE:600:U:U \
+    DS:stream2:DERIVE:600:U:U \
+    DS:stream3:DERIVE:600:U:U \
+    DS:stream4:DERIVE:600:U:U \
+    DS:stream5:DERIVE:600:U:U \
+    DS:stream6:DERIVE:600:U:U \
+    DS:stream7:DERIVE:600:U:U \
+    DS:stream8:DERIVE:600:U:U \
     RRA:AVERAGE:0.5:1:600 \
     RRA:AVERAGE:0.5:6:700 \
     RRA:AVERAGE:0.5:24:775 \
@@ -47,7 +47,7 @@ Data is constructed as a semicolon separated string of current timestamp and 1 v
 ```bash
 rrdtool update TG862A-downstream.rrd '1525656902:2028507401:1261128031:1283119650:1250781607:1292426630:1207561542:1264223879:1268794455'
 ```
-```crontab
+```bash
 */5 * * * * $HOME/bin/arris_stats.sh >> $HOME/tmp/arris-stats.log 2>&1
 ```
 
@@ -95,3 +95,34 @@ rrdtool graph "$ofile" $opts $topt \
     GPRINT:TotalIn:AVERAGE:"Avg\:%4.2lf%s\n" \
     GPRINT:TotalIn:MAX:"Max\:%4.2lf%s\n" \
 ```
+
+## Scripts help
+### arris_stats.sh
+**SUMMARY**:
+    Parse Arris cable modem status page using XPath and store results on rrd. Based on model TG862A status page.
+
+**OPTIONS**:
+        -d Data source file path. Optional, /home/luis/tmp/arris-downstream.rrd by default.
+        -h This help.
+
+### create_data_source.sh
+
+**SUMMARY**:
+    Create rrdtool data source.
+
+**Usage**: 
+    `create_data_source.sh -d <rrd filename> [-s <start time as Unix Epoch>] [-i]`
+
+**Examples**: 
+    `create_data_source.sh -d /home/luis/bin/arris-downstream.rrd -s 1525998621`
+
+### current_stats.sh
+
+**SUMMARY**:
+    Create down stream speed graphic for the given time range, last 24 hs by default.
+**Usage**: 
+    `current_stats.sh [-d <data source file>] [-s <start time>] [-e <end time>] [-o <output image path>]`
+
+**Examples**: 
+    `current_stats.sh -d /home/luis/bin/arris-download.rrd -s '14:00' -e '23:00' -o /home/luis/tmp/myrouter-000.png`
+    `current_stats.sh -d /home/luis/bin/TG862G-download.rrd -s '14:00' -o /home/luis/tmp/myrouter-000.png`
