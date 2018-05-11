@@ -39,18 +39,10 @@ function get_status(){
 }
 
 #---------------------------------------------------------------------------------------
-#
+# Parse status page html using XPath and update data source.
 #---------------------------------------------------------------------------------------
 function record_down_streams(){
     t=$(date '+%s')
-    x="concat(//tbody[tr[td[.='DCID']]]/tr[2]/td[7]/text(), '_' , \
-//tbody[tr[td[.='DCID']]]/tr[3]/td[7]/text(), '_', \
-//tbody[tr[td[.='DCID']]]/tr[4]/td[7]/text())"
-
-    # FIXME
-    # a=($(xmllint --html --xpath 'concat(//tbody[tr[td[.="DCID"]]]/tr[8]/td[7]/text(), "_" ,//tbody[tr[td[.="DCID"]]]/tr[9]/td[7]/text())' ~/Documents/supercanal/Arris/2018-05-02-Touchstone-Status.html 2>/dev/null | tr '_' '\n'))
-    # echo "${a[*]}"
-    # printf "%s, '_', " "${a[@]}"
     stream_xpath="//table/tbody[tr[td[.='DCID']]]/tr[%d]/td[7]/text()"
     update_tpl="%s:%s"
     update_val="$t:"

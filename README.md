@@ -41,12 +41,13 @@ rrdtool create TG862A-downstream.rrd --start 1525303000 \
 ```
 
 ## Inserting data points
-Data is constructed as a semicolon separated string of current timestamp and 1 value per stream taken from the Downstream table.
+Data is constructed as a semicolon separated string of current timestamp and 1 value per stream taken from the **Downstream** table.
 `arris_stats.sh`script can be used to insert values every 10 minutes with a cron job.
 
 ```bash
 rrdtool update TG862A-downstream.rrd '1525656902:2028507401:1261128031:1283119650:1250781607:1292426630:1207561542:1264223879:1268794455'
 ```
+**Cron job**
 ```bash
 */5 * * * * $HOME/bin/arris_stats.sh >> $HOME/tmp/arris-stats.log 2>&1
 ```
