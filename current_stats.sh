@@ -34,7 +34,7 @@ done
 topt="--start $trange1 --end $trange2"
 opts="--width=900 --height=600 --base=1000 --vertical-label='bits/s' --legend-position=east --interlaced"
 
-echo "rrdtool graph $ofile $opts  $topt\\"
+#echo "rrdtool graph $ofile $opts  $topt"
 
 rrdtool graph "$ofile" $opts $topt \
 DEF:in1=$rfile:stream1:AVERAGE \

@@ -11,6 +11,16 @@ We are interested in the ___Octets___ column of the ***Downstream*** table. It h
 
 Solution will be based on standard Linux tools like `bash`, [xmllint](http://xmlsoft.org/xmllint.html) for HTML parsing with XPath and [rrdtool](https://oss.oetiker.ch/rrdtool/) a round robin database for time series data.
 
+## How to use scripts
+1) Create data source, see help for more options.
+    `create_data_source.sh`
+2) Create a cron job to run the update script
+    ```bash
+    */5 * * * * $HOME/bin/arris_stats.sh >> $HOME/tmp/arris-stats.log 2>&1
+    ```
+3) Create graphic to see downtream behavior in bits/s
+    `current_stats.sh -d "$HOME/bin/arris-download.rrd" -s "8 hours ago" -o ~/tmp/myrouter-000.png`
+
 ## Parsing values
 Values are obtained parsing the html with `xmllint`and the following XPath for each row. In the example below, row 2, column 7 holds the first value.
 ```xml
