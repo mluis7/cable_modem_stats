@@ -109,31 +109,31 @@ rrdtool graph "$ofile" $opts $topt \
 
 ## Scripts help
 ### arris_stats.sh
-**SUMMARY**:
-    Parse Arris cable modem status page using XPath and store results on rrd. Based on model TG862A status page.
-
-**OPTIONS**:
-        -d Data source file path. Optional, /home/luis/tmp/arris-downstream.rrd by default.
-        -h This help.
+    SUMMARY:
+        Parse Arris cable modem status page using XPath and store results on rrd. Based on model TG862A status page.
+    
+    OPTIONS:
+            -d Data source file path. Optional, /home/luis/tmp/arris-downstream.rrd by default.
+            -h This help.
 
 ### create_data_source.sh
 
-**SUMMARY**:
-    Create rrdtool data source.
-
-**Usage**: 
-    `create_data_source.sh -d <rrd filename> [-s <start time as Unix Epoch>] [-i]`
-
-**Examples**: 
-    `create_data_source.sh -d /home/luis/bin/arris-downstream.rrd -s 1525998621`
+    SUMMARY:
+        Create rrdtool data source.
+    
+    Usage: 
+        `create_data_source.sh -d <rrd filename> [-s <start time as Unix Epoch>] [-i]`
+    
+    Examples: 
+        `create_data_source.sh -d /home/luis/bin/arris-downstream.rrd -s 1525998621`
 
 ### current_stats.sh
 
-**SUMMARY**:
-    Create down stream speed graphic for the given time range, last 24 hs by default.
-**Usage**: 
-    `current_stats.sh [-d <data source file>] [-s <start time>] [-e <end time>] [-o <output image path>]`
-
-**Examples**: 
-    `current_stats.sh -d /home/luis/bin/arris-download.rrd -s '14:00' -e '23:00' -o /home/luis/tmp/myrouter-000.png`
-    `current_stats.sh -d /home/luis/bin/TG862G-download.rrd -s '14:00' -o /home/luis/tmp/myrouter-000.png`
+    SUMMARY:
+        Create down stream speed graphic for the given time range, last 24 hs by default.
+    Usage: 
+        `current_stats.sh [-d <data source file>] [-s <start time>] [-e <end time>] [-o <output image path>]`
+    
+    Examples: 
+        `current_stats.sh -d /home/luis/bin/arris-download.rrd -s '14:00' -e '23:00' -o /home/luis/tmp/myrouter-000.png`
+        `current_stats.sh -d /home/luis/bin/TG862G-download.rrd -s '14:00' -o /home/luis/tmp/myrouter-000.png`
