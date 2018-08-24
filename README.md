@@ -1,6 +1,10 @@
 # Poor man's cable modem monitor
 
-Monitor an **Arris TG862** cable modem from its status page. It's intended for those CMs that do not support SNMP out of the box but still offer the down stream octets count.
+Monitor an **Arris cable modem** bandwidth usage from its status page. It's intended for those CMs that do not support SNMP out of the box but still offer the down stream octets count. It could be thought of as a router bandwidth usage monitor used.
+
+If you are interested on monitoring a cable modem or router from another vendor (Netgear , etc.), please create an issue mentioning its model and attach the status page HTML source as a file. 
+
+Based on Arris TG862 model.
 
 ## Description
 Typically, status page is found at http://192.168.100.1/cgi-bin/status_cgi
@@ -10,6 +14,9 @@ We are interested in the ___Octets___ column of the ***Downstream*** table. It h
 ![Downstream table](resources/downstream_table.png)
 
 Solution will be based on standard Linux tools like `bash`, [xmllint](http://xmlsoft.org/xmllint.html) for HTML parsing with XPath and [rrdtool](https://oss.oetiker.ch/rrdtool/) a round robin database for time series data.
+
+Other (possibly) supported models: 
+CM550A, CM820A, TG852G, TG862G, TM402G, TM402P, TM502G, TM504G, TM508A, TM602G, TM604G, TM608G, TM702G, TM722G, TM822G, WBM760.
 
 ## How to use scripts
 1) Create data source, see help for more options.
