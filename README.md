@@ -6,6 +6,19 @@ If you are interested on monitoring a cable modem or router from another vendor 
 
 Based on Arris TG862 model.
 
+**Table of Contents**
+
+* [Description](#description)
+  * [How to use scripts](#how-to-use-scripts)
+  * [Parsing values](#parsing-values)
+  * [RRDTool data source](#rrdtool-data-source)
+  * [Inserting data points](#inserting-data-points)
+  * [Creating a graph](#creating-a-graph)
+  * [Scripts help](#scripts-help)
+    * [arris_stats.sh](#arris_statssh)
+    * [create_data_source.sh](#create_data_sourcesh)
+    * [current_stats.sh](#current_statssh)
+    
 ## Description
 Typically, status page is found at http://192.168.100.1/cgi-bin/status_cgi
 
@@ -25,8 +38,10 @@ CM550A, CM820A, TG852G, TG862G, TM402G, TM402P, TM502G, TM504G, TM508A, TM602G, 
     ```bash
     */5 * * * * $HOME/bin/arris_stats.sh >> $HOME/tmp/arris-stats.log 2>&1
     ```
-3) Create graphic to see downtream behavior in bits/s
-    `current_stats.sh -d "$HOME/bin/arris-download.rrd" -s "8 hours ago" -o ~/tmp/myrouter-000.png`
+3) Create graphic to see downstream usage in bits/s
+    ```bash
+    current_stats.sh -d "$HOME/bin/arris-download.rrd" -s "8 hours ago" -o ~/tmp/myrouter-000.png
+    ```
 
 ## Parsing values
 Values are obtained parsing the html with `xmllint`and the following XPath for each row. In the example below, row 2, column 7 holds the first value.
