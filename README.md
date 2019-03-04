@@ -149,9 +149,9 @@ rrdtool graph "$ofile" $opts $topt \
     
     Examples: 
         
-        ```bash
-        create_data_source.sh -d /home/luis/bin/arris-downstream.rrd -s 1525998621
-        ```
+```bash
+            create_data_source.sh -d /home/luis/bin/arris-downstream.rrd -s 1525998621
+```
 
 ### current_stats.sh
 
@@ -159,13 +159,13 @@ rrdtool graph "$ofile" $opts $topt \
         Create down stream speed graphic for the given time range, last 24 hs by default.
     Usage: 
     
-        ```
-        current_stats.sh [-d <data source file>] [-s <start time>] [-e <end time>] [-o <output image path>]
-        ```
+```bash
+         current_stats.sh [-d <data source file>] [-s <start time>] [-e <end time>] [-o <output image path>]
+```
     
     Examples: 
         
-        ```bash
+```bash
         current_stats.sh -d /home/luis/bin/arris-download.rrd -s '14:00' -e '23:00' -o /home/luis/tmp/myrouter-000.png
         current_stats.sh -d /home/luis/bin/TG862G-download.rrd -s '14:00' -o /home/luis/tmp/myrouter-000.png
-        ```
+```
