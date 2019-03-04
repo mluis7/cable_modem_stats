@@ -15,9 +15,9 @@ Based on Arris TG862 model.
   * [Inserting data points](#inserting-data-points)
   * [Creating a graph](#creating-a-graph)
   * [Scripts help](#scripts-help)
-    * [arris_stats.sh](#arris_stats-sh)
-    * [create_data_source.sh](#create_data_source-sh)
-    * [current_stats.sh](#current_stats-sh)
+    * [arris_stats.sh](#arris_statssh)
+    * [create_data_source.sh](#create_data_sourcesh)
+    * [current_stats.sh](#current_statssh)
     
 ## Description
 Typically, status page is found at http://192.168.100.1/cgi-bin/status_cgi
