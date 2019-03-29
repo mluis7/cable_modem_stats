@@ -7,13 +7,13 @@ assignees: mluis7
 
 ---
 
-**Cable modem info**
+**Cable modem info**  
 Vendor: Arris
 Model: TM702G
 
-**Status page html source**
+**Status page html source**  
 The status page must contain a column for octets, unerrored codewords or other value for successfully sent packets.
-
+Example of table html (2 rows showed only for brevity)  
 ```html
 <table width="770" cellspacing="0" cellpadding="0" border="2">
 	<tbody>
