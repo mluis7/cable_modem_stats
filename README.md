@@ -2,7 +2,7 @@
 
 Monitor an **Arris cable modem** bandwidth usage from its status page. It's intended for those CMs that do not support SNMP out of the box but still offer the down stream octets count. It could be thought of as a router bandwidth usage monitor used.
 
-If you are interested on monitoring a cable modem or router from another vendor (Netgear , etc.), please create an issue mentioning its model and attach the status page HTML source as a file. 
+If you are interested on monitoring a cable modem or router from another vendor (Netgear , etc.), please [create an issue](https://github.com/mluis7/cable_modem_stats/issues/new/choose) mentioning its model and attach the status page HTML source as a file. 
 
 Based on Arris TG862 model.
 
