@@ -35,27 +35,27 @@ CM550A, CM820A, TG852G, TG862G, TM402G, TM402P, TM502G, TM504G, TM508A, TM602G, 
 ## How to use scripts
 1) Create data source, see help for more options.
 
-    `create_data_source.sh`
+`create_data_source.sh`
 
 2) Create a cron job to run the update script, for example, every 5 minutes.
 
-    ```bash
-    */5 * * * * $HOME/bin/arris_stats.sh >> $HOME/tmp/arris-stats.log 2>&1
-    ```
+```bash
+*/5 * * * * $HOME/bin/arris_stats.sh >> $HOME/tmp/arris-stats.log 2>&1
+```
 
 After some time there should be enough data to create a graphic showing downstream usage in bits/s
 
-    ```bash
-    current_stats.sh -d "$HOME/bin/arris-download.rrd" -s "8 hours ago" -o ~/tmp/myrouter-000.png
-    ```
+```bash
+current_stats.sh -d "$HOME/bin/arris-download.rrd" -s "8 hours ago" -o ~/tmp/myrouter-000.png
+```
 
 ## How it works
 ### Parsing values
 Values are obtained parsing the html with `xmllint`and the following XPath for each row. In the example below, row 2, column 7 holds the first value.
 
-	```xml
-	"//tbody[tr[td[.='DCID']]]/tr[2]/td[7]/text()"
-	```
+``` xml
+"//tbody[tr[td[.='DCID']]]/tr[2]/td[7]/text()"
+```
 
 ### rrdtool data source
 Let's create the data source specifying the start time in Unix Epoch time. The type of the data source is set to DERIVE instead of COUNTER to avoid the spike in the graphic in case the router is restarted.
