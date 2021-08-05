@@ -10,14 +10,15 @@ Based on Arris TG862 model.
 
 * [Description](#description)
   * [How to use scripts](#how-to-use-scripts)
+* [How it works](#how-it-works)
   * [Parsing values](#parsing-values)
   * [RRDTool data source](#rrdtool-data-source)
   * [Inserting data points](#inserting-data-points)
   * [Creating a graph](#creating-a-graph)
-  * [Scripts help](#scripts-help)
-    * [arris_stats.sh](#arris_statssh)
-    * [create_data_source.sh](#create_data_sourcesh)
-    * [current_stats.sh](#current_statssh)
+* [Scripts help](#scripts-help)
+  * [arris_stats.sh](#arris_statssh)
+  * [create_data_source.sh](#create_data_sourcesh)
+  * [current_stats.sh](#current_statssh)
     
 ## Description
 Typically, status page is found at http://192.168.100.1/cgi-bin/status_cgi
@@ -33,23 +34,30 @@ CM550A, CM820A, TG852G, TG862G, TM402G, TM402P, TM502G, TM504G, TM508A, TM602G, 
 
 ## How to use scripts
 1) Create data source, see help for more options.
+
     `create_data_source.sh`
-2) Create a cron job to run the update script
+
+2) Create a cron job to run the update script, for example, every 5 minutes.
+
     ```bash
     */5 * * * * $HOME/bin/arris_stats.sh >> $HOME/tmp/arris-stats.log 2>&1
     ```
-3) Create graphic to see downstream usage in bits/s
+
+After some time there should be enough data to create a graphic showing downstream usage in bits/s
+
     ```bash
     current_stats.sh -d "$HOME/bin/arris-download.rrd" -s "8 hours ago" -o ~/tmp/myrouter-000.png
     ```
 
-## Parsing values
+## How it works
+### Parsing values
 Values are obtained parsing the html with `xmllint`and the following XPath for each row. In the example below, row 2, column 7 holds the first value.
-```xml
-"//tbody[tr[td[.='DCID']]]/tr[2]/td[7]/text()"
-```
 
-## rrdtool data source
+	```xml
+	"//tbody[tr[td[.='DCID']]]/tr[2]/td[7]/text()"
+	```
+
+### rrdtool data source
 Let's create the data source specifying the start time in Unix Epoch time. The type of the data source is set to DERIVE instead of COUNTER to avoid the spike in the graphic in case the router is restarted.
 
 ```bash
@@ -72,7 +80,7 @@ rrdtool create TG862A-downstream.rrd --start 1525303000 \
     RRA:MAX:0.5:288:797 \
 ```
 
-## Inserting data points
+### Inserting data points
 Data is constructed as a semicolon separated string of current timestamp and 1 value per stream taken from the **Downstream** table.
 `arris_stats.sh`script can be used to insert values every 10 minutes with a cron job.
 
@@ -84,10 +92,11 @@ rrdtool update TG862A-downstream.rrd '1525656902:2028507401:1261128031:128311965
 */5 * * * * $HOME/bin/arris_stats.sh >> $HOME/tmp/arris-stats.log 2>&1
 ```
 
-## Creating a graph
+### Creating a graph
 The command below will create a graph with down stream speed in `bits/s` for 2 hours worth of data between 12:00 and 13:00 of current date. Colors, legends, etc. can be modified on `current_stats.sh script.`
 
 ![Down stream bandwidth 12:00 - 13:00](resources/tg862a-2hr.png "Down stream bandwidth 12:00 - 13:00") 
+
 
 ```bash
 rfile="$HOME/bin/TG862A-downstream.rrd"
