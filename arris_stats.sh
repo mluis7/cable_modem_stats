@@ -51,6 +51,7 @@ function record_down_streams(){
         sx=$(printf "$stream_xpath" $i)
         octets[$i]=$(echo "$1" | xmllint --html --recover --xpath "$sx" - 2>/dev/null)
     done
+    #printf "octets: %s\n" "${octets[@]}"
 
     t=$(date '+%s')
     update_val="$(printf '%d:%d:%d:%d:%d:%d:%d:%d:%d' $t ${octets[*]})"
@@ -59,7 +60,7 @@ function record_down_streams(){
 }
 
 # parse options
-while getopts d:h arg
+while getopts d:hu: arg
 do
   case $arg in
     d) ds=$OPTARG;;
