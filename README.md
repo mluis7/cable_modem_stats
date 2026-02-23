@@ -6,6 +6,8 @@ If you are interested on monitoring a cable modem or router from another vendor 
 
 Based on Arris TG862 model.
 
+[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/donate/?hosted_button_id=WBY3Y35L2P7UQ)
+
 **Table of Contents**
 
 * [Description](#description)
